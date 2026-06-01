@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Modal from '../components/Modal';
 import { MathJax } from 'better-react-mathjax';
-import bocetoMAS from '../../img/boceto1.png';
+import bocetoMAS from '../../img/b1.png';
 import boceto2 from '../../img/boceto2.png';
 import boceto3 from '../../img/boceto3.png';
 import boceto4 from '../../img/boceto4.png';
-import boceto5 from '../../img/boceto5.png';
+import boceto5 from '../../img/b5.png';
 import './Ejercicios.css';
 
 const icon = (
@@ -20,8 +20,8 @@ const ejercicios = [
     titulo: "Movimiento Armónico Simple (M.A.S.)",
     icono: "∿",
     boceto: bocetoMAS,
-    contexto: "Un objeto oscila sujeto a un resorte horizontal. Queremos analizar su movimiento armónico simple y calcular sus parámetros fundamentales.",
-    problema: "Una masa de 0.5 kg se encuentra en el extremo de un resorte con constante k = 200 N/m. La amplitud de oscilación es de 0.1 m. Calcula el período, la frecuencia y la velocidad máxima de la masa.",
+    contexto: "Un bloque oscila sobre una superficie sin fricción unido a un resorte. Se utiliza una lámpara estroboscópica para observar el movimiento y determinar los parámetros característicos del MAS, incluyendo posición, velocidad, aceleración y energía.",
+    problema: "Un bloque de masa m = 0.50 kg está unido a un resorte de k = 200 N/m y oscila sobre una superficie sin fricción. Una lámpara estroboscópica produce 6000 destellos por minuto. Se observa que el bloque pasa por su elongación máxima positiva en los destellos 1 y 6, sin otros máximos entre ellos. La amplitud es A = 8.0 cm. Calcule: (a) período y frecuencia; (b) ecuación de posición con t=0 en elongación máxima; (c) velocidad y aceleración máximas; (d) posición, velocidad y aceleración en T/4; (e) energía mecánica total.",
     formulas: [
       {
         nombre: "Frecuencia angular",
@@ -33,43 +33,74 @@ const ejercicios = [
         ]
       },
       {
-        nombre: "Período",
-        formula: "T = \\frac{2\\pi}{\\omega} = 2\\pi\\sqrt{\\frac{m}{k}}",
+        nombre: "Período desde observación estroboscópica",
+        formula: "T = n \\cdot \\Delta t",
         variables: [
           { symbol: "T", desc: "Período (s)" },
-          { symbol: "π", desc: "Pi ≈ 3.14159" },
+          { symbol: "n", desc: "Número de intervalos entre máximos" },
+          { symbol: "Δt", desc: "Intervalo de tiempo entre destellos (s)" },
         ]
       },
       {
-        nombre: "Frecuencia",
-        formula: "f = \\frac{1}{T}",
+        nombre: "Ecuación de posición (MAS)",
+        formula: "x(t) = A \\cos(\\omega t + \\varphi)",
         variables: [
-          { symbol: "f", desc: "Frecuencia (Hz)" },
+          { symbol: "x(t)", desc: "Posición en función del tiempo (m)" },
+          { symbol: "A", desc: "Amplitud (m)" },
+          { symbol: "φ", desc: "Fase inicial (rad)" },
         ]
       },
       {
-        nombre: "Velocidad máxima",
-        formula: "v_{max} = A \\cdot \\omega",
+        nombre: "Velocidad en MAS",
+        formula: "v(t) = -A\\omega \\sin(\\omega t + \\varphi)",
         variables: [
-          { symbol: "v_max", desc: "Velocidad máxima (m/s)" },
+          { symbol: "v(t)", desc: "Velocidad (m/s)" },
+          { symbol: "v_{max}", desc: "Velocidad máxima = Aω (m/s)" },
+        ]
+      },
+      {
+        nombre: "Aceleración en MAS",
+        formula: "a(t) = -A\\omega^2 \\cos(\\omega t + \\varphi)",
+        variables: [
+          { symbol: "a(t)", desc: "Aceleración (m/s²)" },
+          { symbol: "a_{max}", desc: "Aceleración máxima = Aω² (m/s²)" },
+        ]
+      },
+      {
+        nombre: "Energía mecánica total",
+        formula: "E = \\frac{1}{2}kA^2",
+        variables: [
+          { symbol: "E", desc: "Energía mecánica (J)" },
+          { symbol: "k", desc: "Constante del resorte (N/m)" },
           { symbol: "A", desc: "Amplitud (m)" },
         ]
       },
     ],
     procedimiento: [
-      "1. Identificamos los datos: m = 0.5 kg, k = 200 N/m, A = 0.1 m",
-      "2. Calculamos la frecuencia angular: ω = √(200/0.5) = √400 = 20 rad/s",
-      "3. Calculamos el período: T = 2π/20 = 0.314 s",
-      "4. Calculamos la frecuencia: f = 1/0.314 = 3.18 Hz",
-      "5. Calculamos la velocidad máxima: v_max = 0.1 × 20 = 2 m/s",
+      "Paso 1: Datos - m = 0.50 kg, k = 200 N/m, A = 8.0 cm = 0.08 m, 6000 destellos/min, máximos en destellos 1 y 6",
+      "Paso 2: Frecuencia de destellos = 6000/60 = 100 destellos/s; Δt = 1/100 = 0.01 s entre destellos",
+      "Paso 3: Período - Entre destellos 1 y 6 hay 5 intervalos, entonces T = 5 × 0.01 = 0.05 s",
+      "Paso 4: Frecuencia - f = 1/T = 1/0.05 = 20 Hz",
+      "Paso 5: Frecuencia angular - ω = √(k/m) = √(200/0.50) = √400 = 20 rad/s",
+      "Paso 6: Ecuación de posición - Como comienza en elongación máxima positiva, φ = 0: x(t) = 0.08 cos(20t) m",
+      "Paso 7: Velocidad máxima - v_max = ωA = 20 × 0.08 = 1.6 m/s",
+      "Paso 8: Aceleración máxima - a_max = ω²A = 400 × 0.08 = 32 m/s²",
+      "Paso 9: En t = T/4 = π/40 s ≈ 0.0785 s: x(T/4) = 0.08 cos(π/2) = 0 m; v(T/4) = -1.6 sin(π/2) = -1.6 m/s; a(T/4) = -32 cos(π/2) = 0 m/s²",
+      "Paso 10: Energía mecánica - E = (1/2)kA² = (1/2)(200)(0.08)² = 0.64 J (constante sin fricción)",
     ],
     resultados: {
-      omega: "20 rad/s",
-      periodo: "0.314 s",
-      frecuencia: "3.18 Hz",
-      velocidad: "2 m/s"
+      periodo: "T = 0.05 s",
+      frecuencia: "f = 20 Hz",
+      frecuenciaAngular: "ω = 20 rad/s",
+      ecuacionPosicion: "x(t) = 0.08 cos(20t) m",
+      velocidadMaxima: "v_max = 1.6 m/s",
+      aceleracionMaxima: "a_max = 32 m/s²",
+      posicionEnT4: "x(T/4) = 0 m",
+      velocidadEnT4: "v(T/4) = -1.6 m/s",
+      aceleracionEnT4: "a(T/4) = 0 m/s²",
+      energiaMecanica: "E = 0.64 J"
     },
-    interpretacion: "La masa realiza 3.18 oscilaciones completas cada segundo, con un período de 0.314 segundos. La velocidad máxima alcanzada es de 2 m/s, que ocurre cuando la masa pasa por la posición de equilibrio."
+    interpretacion: "El bloque realiza 20 oscilaciones por segundo con período de 0.05 s. La técnica estroboscópica permite observar que los máximos de amplitud ocurren cada 5 destellos, confirmando el período calculado. En un cuarto de período, el bloque pasa por el equilibrio con velocidad máxima negativa (−1.6 m/s) y aceleración nula. La energía mecánica de 0.64 J se mantiene constante, distribuyéndose entre energía cinética y potencial elástica a lo largo del movimiento."
   },
   {
     id: 2,
@@ -191,40 +222,69 @@ const ejercicios = [
     titulo: "Análisis de Resonancia",
     icono: "📡",   
     boceto: boceto5,   
-    contexto: "La resonancia ocurre cuando un sistema oscilante es excitado con una frecuencia igual a su frecuencia natural, resultando en una amplificación máxima.",
-    problema: "Un sistema masa-resorte tiene una frecuencia natural de 2 Hz. Si es excitado por una fuerza externa con frecuencias de 1 Hz, 2 Hz y 3 Hz, ¿en cuál caso se produce resonancia? ¿Cómo se comporta la amplitud en cada caso?",
+    contexto: "En una planta de manufactura se instala una prensa de estampado sobre un sistema de soportes elásticos. El sistema es excitado por una máquina cercana que genera vibración. Este problema es crítico para la ingeniería, ya que la resonancia puede amplificar significativamente las vibraciones.",
+    problema: "Una prensa de estampado de masa 600 kg está sobre soportes elásticos con rigidez de 240000 N/m y amortiguamiento de 2000 N·s/m. Una máquina cercana genera una fuerza vibratoria de amplitud 1500 N con frecuencia de 3.2 Hz. Determine la frecuencia natural, factor de amortiguamiento, frecuencia de resonancia, si trabaja cerca de resonancia, y la amplitud de vibración.",
     formulas: [
       {
         nombre: "Frecuencia natural",
-        formula: "f_0 = \\frac{1}{2\\pi}\\sqrt{\\frac{k}{m}}",
+        formula: "\\omega_n = \\sqrt{\\frac{k}{m}}",
         variables: [
-          { symbol: "f₀", desc: "Frecuencia natural (Hz)" },
-          { symbol: "k", desc: "Constante del resorte (N/m)" },
+          { symbol: "ω_n", desc: "Frecuencia natural (rad/s)" },
+          { symbol: "k", desc: "Rigidez equivalente (N/m)" },
           { symbol: "m", desc: "Masa (kg)" },
         ]
       },
       {
-        nombre: "Condición de resonancia",
-        formula: "f_{ext} = f_0 \\Rightarrow A_{max}",
+        nombre: "Factor de amortiguamiento",
+        formula: "\\zeta = \\frac{c}{2m\\omega_n}",
         variables: [
-          { symbol: "f_ext", desc: "Frecuencia de excitación (Hz)" },
-          { symbol: "A_max", desc: "Amplitud máxima" },
+          { symbol: "ζ", desc: "Factor de amortiguamiento (adimensional)" },
+          { symbol: "c", desc: "Coeficiente de amortiguamiento (N·s/m)" },
+        ]
+      },
+      {
+        nombre: "Frecuencia de resonancia",
+        formula: "\\omega_r = \\omega_n\\sqrt{1 - 2\\zeta^2}",
+        variables: [
+          { symbol: "ω_r", desc: "Frecuencia de resonancia (rad/s)" },
+        ]
+      },
+      {
+        nombre: "Frecuencia angular de excitación",
+        formula: "\\omega = 2\\pi f",
+        variables: [
+          { symbol: "ω", desc: "Frecuencia angular (rad/s)" },
+          { symbol: "f", desc: "Frecuencia (Hz)" },
+        ]
+      },
+      {
+        nombre: "Amplitud de vibración",
+        formula: "X = \\frac{F_0}{\\sqrt{(k - m\\omega^2)^2 + (c\\omega)^2}}",
+        variables: [
+          { symbol: "X", desc: "Amplitud (m)" },
+          { symbol: "F_0", desc: "Amplitud de la fuerza (N)" },
         ]
       },
     ],
     procedimiento: [
-      "1. La frecuencia natural del sistema es f₀ = 2 Hz",
-      "2. Cuando f_ext = 1 Hz (menor que f₀): Amplitud moderada",
-      "3. Cuando f_ext = 2 Hz (igual a f₀): RESONANCIA → Amplitud máxima (amplificación máxima)",
-      "4. Cuando f_ext = 3 Hz (mayor que f₀): Amplitud disminuye nuevamente",
-      "5. La amplitud es máxima precisamente cuando la frecuencia externa coincide con la frecuencia natural.",
+      "Paso 1: Datos iniciales - m = 600 kg, k = 240000 N/m, c = 2000 N·s/m, F₀ = 1500 N, f = 3.2 Hz",
+      "Paso 2: Frecuencia natural ωₙ = √(240000/600) = √400 = 20 rad/s → fₙ = 20/6.2832 = 3.18 Hz",
+      "Paso 3: Factor de amortiguamiento ζ = 2000/[2(600)(20)] = 2000/24000 = 0.083",
+      "Paso 4: Frecuencia de resonancia ωᵣ = 20√(1-2(0.083)²) = 20√(0.9862) = 19.86 rad/s → fᵣ = 3.16 Hz",
+      "Paso 5: Verificación de resonancia: |3.20 - 3.16| = 0.04 Hz → El sistema trabaja CERCA DE RESONANCIA",
+      "Paso 6: Frecuencia angular de excitación ω = 2π(3.2) = 20.11 rad/s",
+      "Paso 7: Cálculo de amplitud - (k - mω²)² = (240000 - 242646)² = 7001316; (cω)² = 1617648400; X = 1500/40306.9 = 0.0372 m",
+      "Paso 8: Amplitud en centímetros = 3.72 cm",
     ],
     resultados: {
-      frecuenciaNatural: "2 Hz",
-      resonancia: "A frecuencia de 2 Hz",
-      comportamiento: "Amplitud máxima cuando f_ext = f₀"
+      frecuenciaNatural: "3.18 Hz (20 rad/s)",
+      factorAmortiguamiento: "0.083",
+      frecuenciaResonancia: "3.16 Hz (19.86 rad/s)",
+      frecuenciaExcitacion: "3.20 Hz (20.11 rad/s)",
+      amplitudVibracion: "0.0372 m (3.72 cm)",
+      condicionDelSistema: "Cerca de resonancia"
     },
-    interpretacion: "La resonancia se produce a 2 Hz, donde la amplitud es máxima. A frecuencias alejadas de la natural (1 Hz o 3 Hz), la amplitud es menor. Este es un fenómeno importante en ingeniería, ya que la resonancia puede fortalecer o dañar estructuras dependiendo de la aplicación."
+    interpretacion: "El sistema trabaja muy cerca de su frecuencia de resonancia (3.20 Hz vs 3.16 Hz). Esto causa una amplificación importante de la vibración, alcanzando 3.72 cm de amplitud. En ingeniería, esta situación es crítica y requiere acción: rediseñar la rigidez de los soportes, aumentar el amortiguamiento, o aislar la fuente de vibración para evitar daños estructurales y fatiga del material."
   },
 ];
 
